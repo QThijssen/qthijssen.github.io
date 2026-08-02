@@ -220,11 +220,11 @@ h3 {
 }
 
 .intro {
+  position: relative;
+  isolation: isolate;
   display: grid;
-  grid-template-columns: minmax(17.5rem, 19rem) minmax(0, 1fr);
-  gap: clamp(2.5rem, 6vw, 5rem);
-  align-items: start;
-  padding-block: clamp(4rem, 6vw, 4.75rem);
+  min-height: clamp(35rem, 42vw, 40rem);
+  overflow: hidden;
 }
 
 .portrait-frame,
@@ -235,10 +235,10 @@ h3 {
 }
 
 .portrait-frame {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
   width: 100%;
-  max-width: 19rem;
-  border-radius: 0.35rem;
-  aspect-ratio: 15 / 19;
 }
 
 .portrait-frame picture,
@@ -252,7 +252,7 @@ h3 {
 
 .portrait-frame img {
   object-fit: cover;
-  object-position: 50% 42%;
+  object-position: 50% 35%;
 }
 
 .research-media img {
@@ -261,24 +261,31 @@ h3 {
 }
 
 .intro-copy {
-  max-width: 43rem;
-  padding-top: var(--space-1);
+  align-self: end;
+  justify-self: start;
+  width: min(26.5rem, calc(50% - (2 * var(--gutter))));
+  margin-left: calc(max(var(--gutter), calc((100% - var(--site-width)) / 2)) + 5.125rem);
+  padding-bottom: clamp(4rem, 7vw, 6rem);
+  color: #fff;
+  text-align: left;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+  transform: translateY(-5rem);
+}
+
+.intro-copy h1 {
+  margin-bottom: 1.3rem;
+  font-size: clamp(2.65rem, 3.7vw, 3.08rem);
+  font-weight: 620;
+  line-height: 1.05;
 }
 
 .intro-copy p {
-  max-width: 42rem;
-  margin-bottom: var(--space-3);
-  color: #353a3f;
-}
-
-.intro-copy p:first-of-type {
-  font-size: var(--step-1);
-  font-weight: 600;
-  line-height: 1.5;
-}
-
-.intro-copy p:last-child {
-  margin-bottom: 0;
+  max-width: 26.5rem;
+  margin: 0 auto;
+  color: inherit;
+  font-size: clamp(1.1rem, 1.4vw, 1.25rem);
+  font-weight: 520;
+  line-height: 1.48;
 }
 
 .content-section {
@@ -341,11 +348,23 @@ h3 {
   line-height: 1.38;
 }
 
-.research-copy > p:not(.publication-meta, .publication-links) {
+.research-copy > p:not(.publication-meta, .publication-links, .research-authors) {
   margin-bottom: var(--space-3);
   color: var(--color-muted);
   font-size: clamp(0.9rem, 0.88rem + 0.05vw, 0.95rem);
   line-height: 1.58;
+}
+
+.research-authors {
+  margin: -0.15rem 0 0.8rem;
+  color: var(--color-muted);
+  font-size: clamp(0.82rem, 0.81rem + 0.04vw, 0.88rem);
+  line-height: 1.5;
+}
+
+.research-authors strong {
+  color: var(--color-ink);
+  font-weight: 650;
 }
 
 .publication-links {
@@ -383,11 +402,15 @@ h3 {
   line-height: 1.38;
 }
 
-.compact-publication > p:not(.publication-meta, .publication-links) {
+.compact-publication > p:not(.publication-meta, .publication-links, .research-authors) {
   margin-bottom: var(--space-3);
   color: var(--color-muted);
   font-size: clamp(0.88rem, 0.86rem + 0.05vw, 0.93rem);
   line-height: 1.55;
+}
+
+.compact-publication .research-authors {
+  margin-bottom: 0.65rem;
 }
 
 .compact-publication .publication-links {
@@ -521,6 +544,13 @@ h3 {
   color: var(--color-muted);
 }
 
+@media (max-width: 70rem) {
+  .intro-copy {
+    margin-left: calc(max(var(--gutter), calc((100% - var(--site-width)) / 2)) + 2.625rem);
+    transform: translateY(-4.5rem);
+  }
+}
+
 @media (max-width: 62rem) {
   .research-feature {
     gap: var(--space-6);
@@ -589,13 +619,19 @@ h3 {
   }
 
   .intro {
-    grid-template-columns: 1fr;
-    gap: var(--space-5);
-    padding-block: clamp(2.75rem, 8vw, 3.25rem);
+    min-height: clamp(32.5rem, 81.25vw, 39rem);
   }
 
-  .portrait-frame {
-    width: min(100%, 18rem);
+  .portrait-frame img {
+    object-position: 50% 50%;
+  }
+
+  .intro-copy {
+    width: min(100% - (2 * var(--gutter)), 46rem);
+    margin-inline: auto;
+    padding-bottom: clamp(2.75rem, 7vw, 3.5rem);
+    text-align: center;
+    transform: translateY(-2.5rem);
   }
 
   .research-feature {
@@ -613,8 +649,24 @@ h3 {
     --space-7: clamp(2.75rem, 10vw, 3.25rem);
   }
 
-  .portrait-frame {
-    width: min(82%, 17rem);
+  .intro {
+    min-height: clamp(32.5rem, 150vw, 39rem);
+  }
+
+  .intro-copy {
+    width: min(90%, 34rem);
+    padding-bottom: clamp(2.25rem, 8vw, 3rem);
+    transform: translateY(-1rem);
+  }
+
+  .intro-copy h1 {
+    margin-bottom: var(--space-3);
+    font-size: clamp(2rem, 9vw, 2.4rem);
+  }
+
+  .intro-copy p {
+    font-size: clamp(0.98rem, 4.3vw, 1.08rem);
+    line-height: 1.5;
   }
 
   .research-feature {
@@ -673,6 +725,30 @@ h3 {
   .content-section {
     display: block;
     padding-block: 1.5rem;
+  }
+
+  .intro {
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .intro-copy {
+    width: 100%;
+    padding-bottom: 0;
+    color: #000;
+    text-align: left;
+    text-shadow: none;
+    transform: none;
+  }
+
+  .intro-copy h1 {
+    font-size: 24pt;
+  }
+
+  .intro-copy p {
+    max-width: none;
+    color: #000;
+    font-size: 11pt;
   }
 
   .research-feature,
