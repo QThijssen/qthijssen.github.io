@@ -685,6 +685,31 @@ h3 {
   }
 }
 
+@media (max-width: 47.99rem) {
+  .portrait-frame img {
+    object-position: 77% 50%;
+  }
+
+  .intro-copy {
+    width: min(90%, 34rem);
+    margin-inline: auto;
+    padding-bottom: clamp(2.25rem, 8vw, 3rem);
+    text-align: center;
+    transform: translateY(-1rem);
+  }
+
+  .intro-copy h1 {
+    margin-bottom: 1.1rem;
+    font-size: clamp(1.9rem, 8.4vw, 2.3rem);
+  }
+
+  .intro-copy p {
+    max-width: 20rem;
+    font-size: clamp(0.98rem, 4.3vw, 1.08rem);
+    line-height: 1.5;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
