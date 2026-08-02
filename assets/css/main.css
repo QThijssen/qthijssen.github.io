@@ -1,6 +1,6 @@
 /*
  * Quinten Thijssen — academic website
- * A compact editorial system for a factual personal profile.
+ * A compact editorial system for a personal research profile.
  */
 
 :root {
@@ -26,7 +26,6 @@
   --space-6: 2.5rem;
   --space-7: clamp(3.25rem, 5vw, 4.25rem);
   --site-width: 70rem;
-  --text-width: 43rem;
   --gutter: clamp(1.25rem, 4vw, 3rem);
   --header-height: 3.625rem;
 }
@@ -186,6 +185,10 @@ dd {
   margin-top: 0;
 }
 
+figure {
+  margin: 0;
+}
+
 h1,
 h2,
 h3 {
@@ -193,7 +196,7 @@ h3 {
 }
 
 h1 {
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-4);
   font-size: var(--step-4);
   font-weight: 620;
   letter-spacing: -0.035em;
@@ -218,43 +221,64 @@ h3 {
 
 .intro {
   display: grid;
-  grid-template-columns: minmax(0, 1.5fr) minmax(15rem, 0.6fr);
-  gap: clamp(2rem, 5vw, 4rem);
-  align-items: center;
+  grid-template-columns: minmax(17.5rem, 19rem) minmax(0, 1fr);
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: start;
   padding-block: clamp(4rem, 6vw, 4.75rem);
 }
 
-.intro-main {
-  max-width: 43rem;
+.portrait-frame,
+.research-media {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0;
 }
 
-.intro-role {
+.portrait-frame {
+  width: 100%;
+  max-width: 19rem;
+  border-radius: 0.35rem;
+  aspect-ratio: 15 / 19;
+}
+
+.portrait-frame picture,
+.research-media picture,
+.portrait-frame img,
+.research-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.portrait-frame img {
+  object-fit: cover;
+  object-position: 50% 42%;
+}
+
+.research-media img {
+  object-fit: contain;
+  object-position: 50% 50%;
+}
+
+.intro-copy {
+  max-width: 43rem;
+  padding-top: var(--space-1);
+}
+
+.intro-copy p {
+  max-width: 42rem;
   margin-bottom: var(--space-3);
+  color: #353a3f;
+}
+
+.intro-copy p:first-of-type {
   font-size: var(--step-1);
   font-weight: 600;
   line-height: 1.5;
 }
 
-.intro-summary {
-  max-width: 42rem;
+.intro-copy p:last-child {
   margin-bottom: 0;
-  color: #353a3f;
-}
-
-.position-block {
-  padding-top: var(--space-3);
-  border-top: 1px solid var(--color-ink);
-  color: var(--color-muted);
-}
-
-.position-block p {
-  margin-bottom: 0.15rem;
-}
-
-.position-block .institution {
-  margin-bottom: var(--space-1);
-  color: var(--color-ink);
-  font-weight: 650;
 }
 
 .content-section {
@@ -266,26 +290,40 @@ h3 {
   margin-bottom: var(--space-5);
 }
 
-.prose {
-  max-width: var(--text-width);
-}
-
-.prose p {
-  margin-bottom: var(--space-3);
-}
-
-.prose p:last-child {
-  margin-bottom: 0;
-}
-
-.publication-list {
-  max-width: 52rem;
+.research-feed {
   border-top: 1px solid var(--color-ink);
 }
 
-.publication {
-  padding-block: var(--space-5);
+.research-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: center;
+  padding-block: clamp(2.5rem, 4vw, 3.5rem);
   border-bottom: 1px solid var(--color-line);
+}
+
+.research-media {
+  width: 100%;
+  border: 1px solid var(--color-line);
+  border-radius: 0.25rem;
+  background: var(--color-background);
+}
+
+.research-media--antagonistic {
+  aspect-ratio: 3541 / 2875;
+}
+
+.research-media--fluoropolymer {
+  aspect-ratio: 5509 / 4811;
+}
+
+.research-media--polyester-review {
+  aspect-ratio: 2446 / 1529;
+}
+
+.research-copy {
+  max-width: 32rem;
 }
 
 .publication-meta {
@@ -297,43 +335,24 @@ h3 {
   line-height: 1.45;
 }
 
-.publication h3 {
-  margin-bottom: var(--space-2);
+.research-copy h3 {
+  margin-bottom: var(--space-3);
   font-size: clamp(1.05rem, 1.01rem + 0.16vw, 1.16rem);
   line-height: 1.38;
 }
 
-.publication h3 a {
-  color: var(--color-ink);
-  text-decoration-color: transparent;
-  text-decoration-thickness: 0.06em;
-  text-underline-offset: 0.16em;
-}
-
-.publication h3 a:hover,
-.publication h3 a:focus-visible {
-  color: var(--color-accent-dark);
-  text-decoration-color: currentcolor;
-}
-
-.publication-authors,
-.publication-citation {
-  max-width: 76ch;
-  margin-bottom: var(--space-1);
+.research-copy > p:not(.publication-meta, .publication-links) {
+  margin-bottom: var(--space-3);
   color: var(--color-muted);
-  font-size: clamp(0.86rem, 0.84rem + 0.06vw, 0.92rem);
-  line-height: 1.52;
-}
-
-.publication-citation {
-  color: #454b50;
+  font-size: clamp(0.9rem, 0.88rem + 0.05vw, 0.95rem);
+  line-height: 1.58;
 }
 
 .publication-links {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-1) var(--space-4);
-  margin: var(--space-2) 0 0;
+  margin: var(--space-4) 0 0;
   font-size: 0.88rem;
 }
 
@@ -341,9 +360,39 @@ h3 {
   font-weight: 650;
 }
 
-.section-link {
-  margin: var(--space-4) 0 0;
-  font-size: 0.9rem;
+.further-work {
+  padding-top: var(--space-7);
+}
+
+.further-work-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  border-top: 1px solid var(--color-ink);
+}
+
+.compact-publication {
+  display: flex;
+  flex-direction: column;
+  padding-block: var(--space-4);
+}
+
+.compact-publication h3 {
+  margin-bottom: var(--space-2);
+  font-size: clamp(1.05rem, 1.01rem + 0.16vw, 1.16rem);
+  line-height: 1.38;
+}
+
+.compact-publication > p:not(.publication-meta, .publication-links) {
+  margin-bottom: var(--space-3);
+  color: var(--color-muted);
+  font-size: clamp(0.88rem, 0.86rem + 0.05vw, 0.93rem);
+  line-height: 1.55;
+}
+
+.compact-publication .publication-links {
+  margin-top: auto;
+  padding-top: var(--space-2);
 }
 
 .background-columns {
@@ -396,72 +445,38 @@ h3 {
   line-height: 1.52;
 }
 
-.recognition-list {
-  max-width: 56rem;
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5) clamp(2rem, 5vw, 4rem);
   margin: 0;
   padding: 0;
-  border-top: 1px solid var(--color-ink);
   list-style: none;
 }
 
-.recognition-list li {
-  display: grid;
-  grid-template-columns: minmax(14rem, 0.8fr) minmax(0, 1.2fr);
-  gap: var(--space-5);
-  padding-block: var(--space-4);
-  border-bottom: 1px solid var(--color-line);
-}
-
-.recognition-list h3,
-.recognition-list p {
-  margin: 0;
-}
-
-.recognition-list p {
-  color: var(--color-muted);
-}
-
-.recognition-date {
-  margin-bottom: var(--space-1) !important;
-  color: var(--color-accent-dark) !important;
-  font-size: var(--step--1);
-  font-variant-numeric: tabular-nums;
-  font-weight: 700;
-}
-
-.contact-layout {
-  display: grid;
-  grid-template-columns: minmax(10rem, 0.45fr) minmax(18rem, 1fr) minmax(12rem, 0.55fr);
-  gap: clamp(2rem, 5vw, 4rem);
-  align-items: start;
-}
-
-.contact-layout .section-heading {
-  margin-bottom: 0;
-}
-
-.contact-details {
-  max-width: 30rem;
-}
-
-.contact-details p {
-  margin-bottom: var(--space-2);
-}
-
-.contact-email {
-  display: inline-block;
+.contact-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-ink);
+  font-size: 0.9rem;
   font-weight: 650;
+  text-decoration: none;
 }
 
-.profile-links {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-1);
+.contact-links a:hover,
+.contact-links a:focus-visible {
+  color: var(--color-accent);
 }
 
-.profile-links a {
-  padding-block: 0.1rem;
+.contact-links svg {
+  width: 1.35rem;
+  height: 1.35rem;
+  fill: none;
+  stroke: currentcolor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.55;
 }
 
 .site-footer {
@@ -507,6 +522,20 @@ h3 {
 }
 
 @media (max-width: 62rem) {
+  .research-feature {
+    gap: var(--space-6);
+  }
+
+  .further-work-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .compact-publication {
+    max-width: 44rem;
+    border-bottom: 1px solid var(--color-line);
+  }
+
   .background-columns {
     grid-template-columns: 1fr;
     gap: var(--space-6);
@@ -565,17 +594,17 @@ h3 {
     padding-block: clamp(2.75rem, 8vw, 3.25rem);
   }
 
-  .position-block {
-    max-width: 28rem;
+  .portrait-frame {
+    width: min(100%, 18rem);
   }
 
-  .contact-layout {
+  .research-feature {
     grid-template-columns: 1fr;
-    gap: var(--space-4);
+    gap: var(--space-5);
   }
 
-  .contact-layout .section-heading {
-    margin-bottom: var(--space-1);
+  .research-copy {
+    max-width: 38rem;
   }
 }
 
@@ -584,8 +613,12 @@ h3 {
     --space-7: clamp(2.75rem, 10vw, 3.25rem);
   }
 
-  .publication {
-    padding-block: var(--space-4);
+  .portrait-frame {
+    width: min(82%, 17rem);
+  }
+
+  .research-feature {
+    padding-block: clamp(2rem, 8vw, 2.75rem);
   }
 
   .background-list > div {
@@ -593,9 +626,10 @@ h3 {
     gap: var(--space-1);
   }
 
-  .recognition-list li {
-    grid-template-columns: 1fr;
-    gap: var(--space-2);
+  .contact-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
   }
 }
 
@@ -628,18 +662,22 @@ h3 {
 
   .skip-link,
   .site-header,
-  .site-footer {
+  .site-footer,
+  .portrait-frame,
+  .research-media {
     display: none !important;
   }
 
   .intro,
+  .research-feature,
   .content-section {
+    display: block;
     padding-block: 1.5rem;
   }
 
-  .publication,
-  .background-list > div,
-  .recognition-list li {
+  .research-feature,
+  .compact-publication,
+  .background-list > div {
     break-inside: avoid;
   }
 
